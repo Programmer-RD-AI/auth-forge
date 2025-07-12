@@ -7,5 +7,9 @@ type Repository interface {
 	Update(id string, data any) (any, error)
 	Delete(id string) error
 	Close() error
+	HealthCheck() (bool, error)
 }
 
+type BaseRepository struct {
+	providerName string
+}
