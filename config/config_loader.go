@@ -3,23 +3,16 @@ package config
 import (
 	"os"
 	"strconv"
-	"sync"
 
 	"github.com/joho/godotenv"
 )
 
-var (
-	config *Config
-	once   sync.Once
-)
-
 func LoadConfig() *Config {
-	once.Do(func() {
-		godotenv.Load()
-		config = &Config{
-			RedisConfig: loadRedisConfig(),
-		}
-	})
+	godotenv.Load()
+	config := &Config{
+		RedisConfig: loadRedisConfig(),
+		MongoConfig: loadMongoConfig(),
+	}
 	return config
 }
 
@@ -35,6 +28,14 @@ func loadRedisConfig() RedisConfig {
 		Database: db,
 	}
 }
+
+func loadMongoConfig() MongoConfig {
+	uri, _ := GetEnv("MONGODB_URI", "mongodb://localhost:27017")
+	return MongoConfig{
+		Uri: uri,
+	}
+}
+
 func GetEnv[T string | int](key string, defaultVal T) (T, error) {
 	rawEnv, ok := os.LookupEnv(key)
 	if !ok {
