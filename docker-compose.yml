@@ -1,14 +1,6 @@
 version: "3.8"
 
 services:
-  redis:
-    image: redis:8.0-alphine
-    container_name: auth-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-
   mongodb:
     image: mongo:8.0.12-rc0
     container_name: auth-mongo
@@ -18,6 +10,5 @@ services:
       - mongo-data:/data/db
 
 volumes:
-  redis-data: {}
   mongo-data: {}
 

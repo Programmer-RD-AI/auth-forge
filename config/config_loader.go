@@ -10,24 +10,12 @@ import (
 func LoadConfig() *Config {
 	godotenv.Load()
 	config := &Config{
-		RedisConfig: loadRedisConfig(),
 		MongoConfig: loadMongoConfig(),
 	}
 	return config
 }
 
-func loadRedisConfig() RedisConfig {
-	h, _ := GetEnv("REDIS_HOST", "localhost")
-	p, _ := GetEnv("REDIS_PORT", 6379)
-	pass, _ := GetEnv("REDIS_PASSWORD", "")
-	db, _ := GetEnv("REDIS_DATABASE", 0)
-	return RedisConfig{
-		Host:     h,
-		Port:     p,
-		Password: pass,
-		Database: db,
-	}
-}
+
 
 func loadMongoConfig() MongoConfig {
 	uri, _ := GetEnv("MONGODB_URI", "mongodb://localhost:27017")

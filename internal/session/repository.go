@@ -1,12 +1,13 @@
 package session
 
-import "github.com/Programmer-RD-AI/auth-forge/internal/store"
-
+import "github.com/Programmer-RD-AI/auth-forge/internal/model"
 
 type SessionRepository struct {
-	store.RedisStore
+	store model.BaseStore
 }
 
-func CreateSession() {}
-
-func RefreshSession() {}
+func NewSessionRepository(store model.BaseStore) SessionRepository {
+	return SessionRepository{
+		store: nil,
+	}
+}

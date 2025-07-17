@@ -1,4 +1,4 @@
-package session
+package model
 
 import (
 	"time"
@@ -16,3 +16,5 @@ type SessionValue struct {
 	UserID   string
 	Metadata Metadata
 }
+
+
