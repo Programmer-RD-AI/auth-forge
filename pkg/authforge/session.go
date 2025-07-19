@@ -6,4 +6,4 @@ func CreateOrExpireToken(userId string) string {
 
 func SessionValidation(sessionId string) bool { return true }
 
-func RevokeSession() (bool, error) { return true, nil }
+func RevokeSession(sessionId string) (bool, error) { return true, nil }

@@ -16,5 +16,3 @@ type SessionValue struct {
 	UserID   string
 	Metadata Metadata
 }
-
-

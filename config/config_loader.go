@@ -15,8 +15,6 @@ func LoadConfig() *Config {
 	return config
 }
 
-
-
 func loadMongoConfig() MongoConfig {
 	uri, _ := GetEnv("MONGODB_URI", "mongodb://localhost:27017")
 	return MongoConfig{
