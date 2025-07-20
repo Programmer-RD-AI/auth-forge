@@ -7,12 +7,8 @@ import (
 type Metadata = map[string]any
 
 type Session struct {
-	SessionID  string
-	ExpireTime time.Duration
-	SessionValue
-}
-
-type SessionValue struct {
-	UserID   string
-	Metadata Metadata
+	SessionId string    `bson:"sessionId,omitempty"`
+	ExpireAt  time.Time `bson:"expireAt,omitempty"`
+	UserId    string    `bson:"userId,omitempty"`
+	Metadata  Metadata  `bson:"metaData,omitempty"`
 }
