@@ -32,7 +32,20 @@ func (m *MongoDBStore) Create(ctx context.Context) (interface{}, error) {
 }
 
 func (m *MongoDBStore) Read(ctx context.Context, searchQuery map[string]string, readAll *bool) ([]any, error) {
-	var final_res []any
 	filter := util.ConvertToBSON(searchQuery)
-	
+	var res []any
+	if *readAll == true {
+		cur, err := m.coll.Find(ctx, filter)
+		if err = cur.All(ctx, &res); err != nil {
+			return nil, err
+		}
+		defer cur.Close(ctx)
+		return res, nil
+	}
+	var raw_res any
+	if err := m.coll.FindOne(ctx, filter).Decode(&raw_res); err != nil {
+		return nil, err
+	}
+	res = append(res, raw_res)
+	return res, nil
 }
